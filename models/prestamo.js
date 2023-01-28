@@ -11,13 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      prestamo.belongsTo(models.libro, { foreignKey: 'id_libro' })
+      prestamo.belongsTo(models.user, { foreignKey: 'id_user' })
+    }
     }
   }
   prestamo.init({
-    title: DataTypes.STRING
+    titulo: DataTypes.INTEGER,
+    fecha: DataTypes.DATE,
+    cantidad: DataTypes.INTEGER
+
   }, {
     sequelize,
     modelName: 'prestamo',
   });
   return prestamo;
-};
