@@ -11,12 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      prestamo.belongsTo(models.libro, { foreignKey: 'id_libro' })
-      prestamo.belongsTo(models.user, { foreignKey: 'id_user' })
+      prestamo.belongsTo(models.libro)
+      prestamo.belongsTo(models.user)
     }
     }
   }
   prestamo.init({
+    
     titulo: DataTypes.INTEGER,
     fecha: DataTypes.DATE,
     cantidad: DataTypes.INTEGER
