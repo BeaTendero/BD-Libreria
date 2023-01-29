@@ -3,12 +3,12 @@ const {Sequelize, DataTypes} = require('sequelize');
 const dotenv = require('dotenv').config();
 
 const sequelize = new Sequelize(
-    process.env.MYSQL_DATABASE , 
-    process.env.MYSQL_USER,
-    process.env.MYSQL_PASSWORD ,
+    process.env.MYSQL_DATABASE || config.development.database, 
+    process.env.MYSQL_USER || config.development.username,
+    process.env.MYSQL_PASSWORD || config.development.password,
     {
-        host: process.env.MYSQL_HOST ,
-        port: process.env.MYSQL_PORT ,
+        host: process.env.MYSQL_HOST ||config.development.host,
+        port: process.env.MYSQL_PORT ||config.development.port || '3008',
         dialect: 'mysql',
         operatorAliases: false,
         pool: {
@@ -25,5 +25,3 @@ module.exports = sequelize.authenticate()
     console.log('MYSQL connected'); 
     return db;
 });
-
-module.exports.sequelize = sequelize;
