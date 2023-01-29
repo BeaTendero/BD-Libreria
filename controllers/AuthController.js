@@ -7,7 +7,7 @@ const {log} = require ('wiston');
 const AuthController = {};//Create the object controller
 
 //-------------------------------------------------------------------------------------
-//Login users with database
+//Login  with database
 //get user
 AuthController.signIn = (req, res) =>{
         let { email, password } = req.body;
@@ -19,7 +19,7 @@ AuthController.signIn = (req, res) =>{
             } else {
                 if (bcrypt.compareSync(password, user.password)) {
                     // Creamos el token
-                    let token = jwt.sign({ users: user }, authConfig.secret);
+                    let token = jwt.sign({ user: user }, authConfig.secret);
 
                     res.json({
                         user: user,
@@ -37,7 +37,7 @@ AuthController.signIn = (req, res) =>{
 
 
 //-------------------------------------------------------------------------------------
-//REGISTER new users in database
+//REGISTER new user in database
 //create user
 AuthController.signUp = (req, res)=> {
 
@@ -52,7 +52,7 @@ AuthController.signUp = (req, res)=> {
             name: req.body.name,
             email: req.body.email,
             password: passwordCrypted
-        }).then(users => {
+        }).then(user => {
 
             // Creamos el token
             let token = jwt.sign({user: user}, authConfig.secret);
